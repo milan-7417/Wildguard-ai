@@ -1,14 +1,26 @@
 # 🛡️ WildGuard AI
 ### AI-Powered Human–Wildlife Conflict Prediction & Prevention
 
-WildGuard AI is an AI-powered geospatial decision-support system designed to predict human-elephant conflict (HEC) hotspots and recommend targeted conservation actions. 
+<div align="left">
+    <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
+    <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white" alt="Streamlit" />
+    <img src="https://img.shields.io/badge/XGBoost-1E88E5?style=for-the-badge&logo=xgboost&logoColor=white" alt="XGBoost" />
+    <img src="https://img.shields.io/badge/SHAP%20(XAI)-000000?style=for-the-badge&logo=shap&logoColor=white" alt="SHAP" />
+    <img src="https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=for-the-badge&logo=scikit-learn&logoColor=white" alt="Scikit-Learn" />
+    <img src="https://img.shields.io/badge/GeoPandas-139C5A?style=for-the-badge&logo=geopandas&logoColor=white" alt="GeoPandas" />
+    <img src="https://img.shields.io/badge/Folium-77B300?style=for-the-badge&logo=leaflet&logoColor=white" alt="Folium" />
+    <img src="https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white" alt="Pandas" />
+    <img src="https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white" alt="NumPy" />
+    <img src="https://img.shields.io/badge/Plotly-%233F4F75.svg?style=for-the-badge&logo=plotly&logoColor=white" alt="Plotly" />
+</div>
 
+<br>
+
+WildGuard AI is a complete, hackathon-ready geospatial decision-support system designed to predict human-elephant conflict (HEC) hotspots, map ecological suitability, and recommend targeted conservation actions.
 
 ![WildGuard AI](images/full_width.png)
 
 This project was built for the **"Hack the Habitat"** hackathon (Theme: *"Build tech that protects the planet"*), focusing on the **Wayanad District in Kerala, India**—a global HEC hotspot in the Western Ghats mountain range.
-
-
 
 ---
 
@@ -37,7 +49,7 @@ python scripts/build_features.py
 python scripts/train.py
 ```
 
-### 3. Run the Streamlit Conservation Console
+### 3. Launch the Conservation Console
 ```bash
 streamlit run app/main.py
 ```
@@ -46,14 +58,27 @@ streamlit run app/main.py
 
 ## 📊 Modeling & Performance
 
-To prevent **spatial leakage** caused by spatial autocorrelation (grid cells near each other having identical environmental contexts), WildGuard AI uses a **Geographically Aware Spatial Cross-Validation** strategy. Grid cells are clustered into 5 distinct geographic zones using K-Means, and model validation is performed by holding out entire spatial clusters.
+To prevent **spatial leakage** caused by spatial autocorrelation (grid cells near each other sharing identical environmental contexts), WildGuard AI uses a **Geographically Aware Spatial Cross-Validation** strategy. Grid cells are clustered into 5 distinct geographic zones using K-Means, and model validation is performed by holding out entire spatial clusters.
 
 ### Spatial K-Fold Validation Results:
-- **XGBoost Classifier (Final Model)**: ROC-AUC: **0.8911**, PR-AUC (Average Precision): **0.6483**, F1-Score: **0.5978**
-- **Random Forest Baseline**: ROC-AUC: **0.9014**, PR-AUC: **0.6346**, F1-Score: **0.5938**
-- **Logistic Regression Baseline**: ROC-AUC: **0.8931**, PR-AUC: **0.6912**, F1-Score: **0.6190**
+
+| Model | Spatial ROC-AUC | PR-AUC (Avg Precision) | F1-Score | Precision | Recall |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **XGBoost Classifier (Selected)** | **0.8911** | **0.6483** | **0.5978** | **0.6328** | **0.5664** |
+| **Logistic Regression Baseline** | 0.8931 | 0.6912 | 0.6190 | 0.7156 | 0.5455 |
+| **Random Forest Baseline** | 0.9014 | 0.6346 | 0.5938 | 0.6726 | 0.5315 |
 
 The trained model and its SHAP TreeExplainer are saved as serialized artifacts under `models/` for real-time inference and local explainability in the dashboard.
+
+---
+
+## 💡 System Features
+
+* **Overview Console**: Executive summary of conflict risk, metrics (total at-risk habitat in $km^2$), and high-risk alerts.
+* **Interactive Risk Map**: 713-cell Folium grid map overlay of Wayanad. Click any cell to retrieve localized environmental attributes and run on-the-fly local **SHAP log-odds explanations** of the risk drivers.
+* **Explainable ML Analysis**: Spatial cross-validation ROC/PR metrics curves and a global SHAP feature importance summary.
+* **Habitat & Corridors**: Calculates a transparent connectivity suitability score (0-100) based on vegetation, water proximity, road barriers, and human pressure.
+* **Action Prevention Center**: Generates prioritized, rule-based recommendation cards (electric fences, alternate crop buffer zones, alarms) based on local cell vulnerability metrics.
 
 ---
 
@@ -63,7 +88,7 @@ The trained model and its SHAP TreeExplainer are saved as serialized artifacts u
 wildguard-ai/
 │
 ├── app/
-│   ├── main.py                # Main launcher
+│   ├── main.py                # Main launcher console
 │   ├── config.py              # Custom theme CSS & asset paths
 │   └── pages/
 │       ├── __init__.py
@@ -100,7 +125,6 @@ wildguard-ai/
 ### Overview
 
 ![WildGuard AI](images/image.png)
-
 
 ## 🛡️ Scientific Wording Disclaimer
 > **"WildGuard AI estimates spatial human–elephant conflict risk using historical conflict patterns and environmental/geospatial factors. It does not track animals or predict exact movement paths in real-time."**

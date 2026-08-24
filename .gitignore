@@ -2,14 +2,27 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
-.streamlit/
+
+# Ignore raw data files
 data/raw/*
 !data/raw/.gitkeep
+
+# Keep temporary processed files ignored, but allow the final processed CSV
 data/processed/*
 !data/processed/.gitkeep
-models/*.json
-models/*.bin
-models/*.pkl
+!data/processed/final_features_with_clusters.csv
+
+# Allow trained models and explainers to be pushed for Streamlit Cloud deployment
+models/*
+!models/.gitkeep
+!models/xgb_model.json
+!models/shap_explainer.pkl
+!models/metrics.json
+
+# Allow Streamlit config variables to apply
+.streamlit/*
+!.streamlit/config.toml
+
 .ipynb_checkpoints/
 .venv/
 env/

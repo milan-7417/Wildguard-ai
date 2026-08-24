@@ -3,7 +3,12 @@
 
 WildGuard AI is an AI-powered geospatial decision-support system designed to predict human-elephant conflict (HEC) hotspots and recommend targeted conservation actions. 
 
+
+![WildGuard AI](images/full_width.png)
+
 This project was built for the **"Hack the Habitat"** hackathon (Theme: *"Build tech that protects the planet"*), focusing on the **Wayanad District in Kerala, India**—a global HEC hotspot in the Western Ghats mountain range.
+
+
 
 ---
 
@@ -91,6 +96,11 @@ wildguard-ai/
 ```
 
 ---
+
+### Overview
+
+![WildGuard AI](images/image.png)
+
 
 ## 🛡️ Scientific Wording Disclaimer
 > **"WildGuard AI estimates spatial human–elephant conflict risk using historical conflict patterns and environmental/geospatial factors. It does not track animals or predict exact movement paths in real-time."**

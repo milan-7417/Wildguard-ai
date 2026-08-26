@@ -24,6 +24,29 @@ This project was built for the **"Hack the Habitat"** hackathon (Theme: *"Build 
 
 ---
 
+## 🚨 The Challenge: Human-Elephant Conflict (HEC)
+
+Wayanad District, situated in the Western Ghats of Kerala, India, is a global biodiversity hotspot and home to the Brahmagiri-Nilgiri-Eastern Ghats elephant population—one of the largest remaining wild Asian elephant (*Elephas maximus*) populations in the world. 
+
+However, this landscape has become an active epicenter for **Human-Elephant Conflict (HEC)** due to:
+* **Habitat Fragmentation:** Rapid land-use changes, agricultural encroachment (tea, coffee, and rubber plantations), and linear infrastructure have fragmented traditional elephant migration corridors.
+* **Overlapping Habitats:** A complex mosaic layout where human settlements directly border protected forest zones, leading to frequent encounters.
+* **Extreme Seasonal Migration:** Elephants migrate into Wayanad during dry seasons seeking perennial water sources, escalating interactions with local farming communities.
+
+### 📉 Impact & Consequences:
+* **Loss of Lives:** Over 100 human deaths across Kerala between 2021 and 2025, with Wayanad at the absolute center, alongside significant casualties among elephants due to retaliatory killings, electrocutions, and accidents.
+* **Livelihood Destruction:** Thousands of incidents of crop raiding and property damage annually, financially devastating marginal farmers.
+* **Ecological Strain:** Reactive mitigation measures (like ad-hoc barriers or translocation) disrupt natural elephant behaviors and migration patterns without solving the root cause.
+
+### 💡 The Solution: How WildGuard AI Helps
+Existing mitigation strategies are largely **reactive** (compensating farmers after damage or deploying response teams mid-incident). WildGuard AI introduces a **proactive, data-driven approach**:
+1. **Predictive Risk Mapping:** Uses historical conflict data, topographical features (elevation/slope), and proximity to infrastructure/resources to identify high-risk grid zones using a geographically aware XGBoost model.
+2. **Explainable AI (XAI):** Uses SHAP values to explain the specific environmental drivers (e.g., distance to water vs. forest density) driving the risk in each 0.02° grid cell, allowing conservationists to understand *why* a location is high-risk.
+3. **Habitat Connectivity:** Maps ecological corridors to identify natural pathways that should be protected to facilitate safe elephant passage.
+4. **Prioritized Action Engine:** Generates localized, rule-based recommendation cards (such as bio-fences, early-warning systems, or crop-shifting buffers) tailored to the unique geospatial vulnerabilities of each zone.
+
+---
+
 ## 🚀 Quickstart Guide
 
 Ensure you have Python 3.10+ installed. Follow these steps to set up the environment, run the ML pipeline, and launch the interactive conservation console:

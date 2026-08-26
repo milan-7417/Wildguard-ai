@@ -97,20 +97,35 @@ def render():
     with map_col:
         st.markdown("<h3 style='margin-bottom:15px;'>Potential Habitat Connectivity Zones</h3>", unsafe_allow_html=True)
         
-        # Plotly density map of corridor suitability (light style)
-        fig = px.density_mapbox(
-            df, 
-            lat="centroid_lat", 
-            lon="centroid_lon", 
-            z="corridor_suitability", 
-            radius=16,
-            center=dict(lat=11.7258, lon=76.10), 
-            zoom=9.5,
-            mapbox_style="carto-positron",
-            color_continuous_scale="Viridis", # Beautiful purple-to-yellow scale
-            labels={"corridor_suitability": "Suitability"},
-            title=None
-        )
+        # Plotly density map of corridor suitability (light style) (handling Plotly v6 map/mapbox deprecations)
+        if hasattr(px, "density_map"):
+            fig = px.density_map(
+                df, 
+                lat="centroid_lat", 
+                lon="centroid_lon", 
+                z="corridor_suitability", 
+                radius=16,
+                center=dict(lat=11.7258, lon=76.10), 
+                zoom=9.5,
+                map_style="carto-positron",
+                color_continuous_scale="Viridis", # Beautiful purple-to-yellow scale
+                labels={"corridor_suitability": "Suitability"},
+                title=None
+            )
+        else:
+            fig = px.density_mapbox(
+                df, 
+                lat="centroid_lat", 
+                lon="centroid_lon", 
+                z="corridor_suitability", 
+                radius=16,
+                center=dict(lat=11.7258, lon=76.10), 
+                zoom=9.5,
+                mapbox_style="carto-positron",
+                color_continuous_scale="Viridis", # Beautiful purple-to-yellow scale
+                labels={"corridor_suitability": "Suitability"},
+                title=None
+            )
         fig.update_layout(
             margin=dict(l=0, r=0, t=0, b=0),
             paper_bgcolor="rgba(0,0,0,0)",

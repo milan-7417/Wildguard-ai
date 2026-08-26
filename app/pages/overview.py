@@ -98,26 +98,47 @@ def render():
     
     with map_col:
         st.markdown("<h3 style='margin-bottom:15px;'>Landscape Conflict Risk Heatmap</h3>", unsafe_allow_html=True)
-        # Create a beautiful Plotly density map with light theme style
-        fig = px.density_mapbox(
-            df, 
-            lat="centroid_lat", 
-            lon="centroid_lon", 
-            z="risk_score", 
-            radius=15,
-            center=dict(lat=11.7258, lon=76.10), 
-            zoom=9.5,
-            mapbox_style="carto-positron",
-            color_continuous_scale=[
-                [0.0, "rgba(5, 150, 105, 0.1)"],     # Low (transparent green)
-                [0.25, "rgba(5, 150, 105, 0.4)"],
-                [0.5, "rgba(180, 83, 9, 0.7)"],      # Mod (amber)
-                [0.75, "rgba(194, 65, 12, 0.85)"],    # High (orange)
-                [1.0, "rgba(220, 38, 38, 1.0)"]       # Critical (red)
-            ],
-            labels={"risk_score": "Risk Score"},
-            title=None
-        )
+        # Create a beautiful Plotly density map with light theme style (handling Plotly v6 map/mapbox deprecations)
+        if hasattr(px, "density_map"):
+            fig = px.density_map(
+                df, 
+                lat="centroid_lat", 
+                lon="centroid_lon", 
+                z="risk_score", 
+                radius=15,
+                center=dict(lat=11.7258, lon=76.10), 
+                zoom=9.5,
+                map_style="carto-positron",
+                color_continuous_scale=[
+                    [0.0, "rgba(5, 150, 105, 0.1)"],     # Low (transparent green)
+                    [0.25, "rgba(5, 150, 105, 0.4)"],
+                    [0.5, "rgba(180, 83, 9, 0.7)"],      # Mod (amber)
+                    [0.75, "rgba(194, 65, 12, 0.85)"],    # High (orange)
+                    [1.0, "rgba(220, 38, 38, 1.0)"]       # Critical (red)
+                ],
+                labels={"risk_score": "Risk Score"},
+                title=None
+            )
+        else:
+            fig = px.density_mapbox(
+                df, 
+                lat="centroid_lat", 
+                lon="centroid_lon", 
+                z="risk_score", 
+                radius=15,
+                center=dict(lat=11.7258, lon=76.10), 
+                zoom=9.5,
+                mapbox_style="carto-positron",
+                color_continuous_scale=[
+                    [0.0, "rgba(5, 150, 105, 0.1)"],     # Low (transparent green)
+                    [0.25, "rgba(5, 150, 105, 0.4)"],
+                    [0.5, "rgba(180, 83, 9, 0.7)"],      # Mod (amber)
+                    [0.75, "rgba(194, 65, 12, 0.85)"],    # High (orange)
+                    [1.0, "rgba(220, 38, 38, 1.0)"]       # Critical (red)
+                ],
+                labels={"risk_score": "Risk Score"},
+                title=None
+            )
         fig.update_layout(
             margin=dict(l=0, r=0, t=0, b=0),
             paper_bgcolor="rgba(0,0,0,0)",
